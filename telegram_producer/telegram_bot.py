@@ -6,10 +6,6 @@ from producer import MessageQueue
 import json
 import os
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
 
 class TelegramRabbitMQBot():
 

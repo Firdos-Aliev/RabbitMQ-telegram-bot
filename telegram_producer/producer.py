@@ -1,5 +1,4 @@
 import pika
-import os
 
 
 class MessageQueue():
