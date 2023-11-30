@@ -1,0 +1,7 @@
+telegram_producer/.env
+telegram_producer/env/
+telegram_producer/__pycache__/
+
+consumer/.env
+consumer/env/
+consumer/__pycache__/

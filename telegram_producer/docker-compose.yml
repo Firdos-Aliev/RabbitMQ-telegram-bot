@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  rabbitMQ:
+    image: rabbitmq:3.9-management
+    ports:
+      - ${AMQP_PORT}:${AMQP_PORT}
+      - 15672:15672
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 10s
+      timeout: 10s
+      retries: 2
+
+  telegram_bot:
+    build: .
+    ports:
+      - 8081:8081
+    restart: on-failure
+    depends_on:
+      - rabbitMQ
+    links:
+      - rabbitMQ
+    environment:
+      AMQP_USER: ${AMQP_USER}
+      AMQP_PASSWORD: ${AMQP_PASSWORD}
+      AMQP_ADDRESS: rabbitMQ
+      AMQP_VHOST: ${AMQP_VHOST}
+      AMQP_PORT: ${AMQP_PORT}
+      EXTERNAL_API_URL: ${EXTERNAL_API_URL}
+      BOT_TOKEN: ${BOT_TOKEN}
+    
+  

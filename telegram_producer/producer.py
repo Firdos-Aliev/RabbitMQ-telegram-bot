@@ -24,7 +24,3 @@ class MessageQueue():
     async def publish_message(self, message):
         self.channel.basic_publish(exchange="", routing_key="0", body=message)
 
-    
-    def __del__(self):
-        self.connection.close()
-
